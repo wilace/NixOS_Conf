@@ -44,6 +44,7 @@
   users.users.wilace = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
+    shell = pkgs.zsh;
   };
 
   # List packages installed in system profile. To search, run:
@@ -56,9 +57,6 @@
 
   # Enable zsh
   programs.zsh.enable = true;
-
-  # Change default shell
-  users.defaultUserShell = pkgs.zsh;
 
   # Enable nix-command and nix-flakes
   nix.settings.experimental-features = [ "nix-command" "flakes" ];
