@@ -16,43 +16,45 @@
 
   outputs = { self, nixpkgs, nixos-wsl, home-manager, vscode-server, ... }@inputs: {
 
-    # nyx (virtual box)
-    nixosConfigurations.nyx = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./nyx
+    nixosConfigurations = {
+      # nyx (virtual box)
+      nyx = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./nyx
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-          home-manager.users.wilace = import ./nyx/home.nix;
-        }
-      ];
-    };
+            home-manager.users.wilace = import ./nyx/home.nix;
+          }
+        ];
+      };
 
-    # hemera (wsl)
-    nixosConfigurations.hemera = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      modules = [
-        ./hemera
+      # hemera (wsl)
+      hemera = nixpkgs.lib.nixosSystem {
+        system = "x86_64-linux";
+        modules = [
+          ./hemera
 
-        nixos-wsl.nixosModules.default
+          nixos-wsl.nixosModules.default
 
-        vscode-server.nixosModules.default
-        ({ config, pkgs, ... }: {
-          services.vscode-server.enable = true;
-        })
+          vscode-server.nixosModules.default
+          ({ config, pkgs, ... }: {
+            services.vscode-server.enable = true;
+          })
 
-        home-manager.nixosModules.home-manager
-        {
-          home-manager.useGlobalPkgs = true;
-          home-manager.useUserPackages = true;
+          home-manager.nixosModules.home-manager
+          {
+            home-manager.useGlobalPkgs = true;
+            home-manager.useUserPackages = true;
 
-          home-manager.users.nixos = import ./hemera/home.nix;
-        }
-      ];
+            home-manager.users.nixos = import ./hemera/home.nix;
+          }
+        ];
+      };
     };
   };
 }

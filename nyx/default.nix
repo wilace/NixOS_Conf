@@ -21,7 +21,7 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Define hostname.
-  networking.hostName = "nyx";
+  networking.hostName = "vm"; # virtual machine
 
   # List packages installed in system profile. To search, run:
   # $ nix search wget

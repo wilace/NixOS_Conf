@@ -14,7 +14,7 @@
   };
 
   # Define hostname.
-  networking.hostName = "hemera";
+  networking.hostName = "wsl";
 
   # Enable wsl.
   wsl = {
