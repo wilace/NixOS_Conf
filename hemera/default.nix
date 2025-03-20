@@ -1,9 +1,14 @@
-{ config, lib, pkgs, ... }:
-
+{ lib, pkgs, ... }:
+let
+  config-dir = ../config;
+in
 {
   imports =
     [
-      ../base-configuration.nix
+      (config-dir + "/base-configuration.nix")
+      (config-dir + "/i18n.nix")
+      (config-dir + "/font.nix")
+      (config-dir + "/sound.nix")
     ];
 
   # Define a user account.
@@ -15,15 +20,4 @@
 
   # Define hostname.
   networking.hostName = "wsl";
-
-  # Enable wsl.
-  wsl = {
-    enable = true;
-    defaultUser = "nixos";
-  };
-
-  environment.systemPackages = with pkgs; [
-    git
-    wget
-  ];
 }

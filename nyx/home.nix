@@ -1,11 +1,14 @@
+let
+  config-dir = ../config;
+in
 {
   imports = [
-    ../home.nix
+    (config-dir + "/base-home.nix")
   ];
 
-  home = rec {
+  home = {
     username = "wilace";
-    homeDirectory = "/home/${username}";
+    homeDirectory = "/home/wilace";
     stateVersion = "24.11";
   };
 }

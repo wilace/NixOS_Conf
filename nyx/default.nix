@@ -1,12 +1,16 @@
-{ config, lib, pkgs, ... }:
-
+{ lib, pkgs, ... }:
+let
+  config-dir = ../config;
+in
 {
   imports =
     [ # Include the results of the hardware scan.
-      ../base-configuration.nix
+      (config-dir + "/base-configuration.nix")
+      (config-dir + "/display-server/x11.nix")
+      (config-dir + "/i18n.nix")
+      (config-dir + "/font.nix")
+      (config-dir + "/sound.nix")
       ./hardware-configuration.nix
-      ./gui-configuration.nix
-      ./virtualbox-configuration.nix
     ];
 
   # Define a user account.
@@ -21,14 +25,12 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   # Define hostname.
-  networking.hostName = "vm"; # virtual machine
+  networking.hostName = "vm"; # virtual-machine
 
-  # List packages installed in system profile. To search, run:
-  # $ nix search wget
-  environment.systemPackages = with pkgs; [
-    git
-    vim
-    wget
-  ];
+  # Enable desktop manager
+  services.xserver = {
+    displayManager.gdm.enable = true;
+    desktopManager.gnome.enable = true;
+  };
 }
 

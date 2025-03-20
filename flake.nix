@@ -23,6 +23,10 @@
         modules = [
           ./nyx
 
+          {
+            virtualisation.virtualbox.guest.enable = true;
+          }
+
           home-manager.nixosModules.home-manager
           {
             home-manager.useGlobalPkgs = true;
@@ -40,6 +44,9 @@
           ./hemera
 
           nixos-wsl.nixosModules.default
+          {
+            wsl.enable = true;
+          }
 
           vscode-server.nixosModules.default
           ({ config, pkgs, ... }: {
