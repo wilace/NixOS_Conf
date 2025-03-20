@@ -21,7 +21,7 @@
       nyx = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./nyx
+          ./profiles/nyx
 
           {
             virtualisation.virtualbox.guest.enable = true;
@@ -32,7 +32,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.wilace = import ./nyx/home.nix;
+            home-manager.users.wilace = import ./profiles/nyx/home.nix;
           }
         ];
       };
@@ -41,7 +41,7 @@
       hemera = nixpkgs.lib.nixosSystem {
         system = "x86_64-linux";
         modules = [
-          ./hemera
+          ./profiles/hemera
 
           nixos-wsl.nixosModules.default
           {
@@ -58,7 +58,7 @@
             home-manager.useGlobalPkgs = true;
             home-manager.useUserPackages = true;
 
-            home-manager.users.nixos = import ./hemera/home.nix;
+            home-manager.users.nixos = import ./profiles/hemera/home.nix;
           }
         ];
       };

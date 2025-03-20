@@ -1,5 +1,5 @@
 let
-  config-dir = ../config;
+  config-dir = ../../config;
 in
 {
   imports = [
